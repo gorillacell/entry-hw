@@ -4,7 +4,7 @@ function watch_dog_logger(log_message){
     
     return watch_dog.log_message = log_message;
 }
-
+ 
 function micros (return_float) {
     // http://jsphp.co/jsphp/fn/view/gettimeofday
     // + original by: Brett Zamir (http://brett-zamir.me)
