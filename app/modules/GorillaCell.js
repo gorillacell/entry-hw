@@ -1431,7 +1431,7 @@ function Module() {
     this.lastSendTime = 0;
     this.isDraing = false;
 
-    this.log_message = [];
+    this._address;
 }
 
 let sensorIdx = 0;
@@ -1487,7 +1487,6 @@ Module.prototype.requestRemoteData = function(handler) {
     
     setTimeout(function() {
         handler.write("watch_dog", this.log_message);
-        handler.write("watch_dog", "What?");
     }, 1000);
 };
 
@@ -1845,10 +1844,12 @@ Module.prototype.makeOutputBuffer = function(device, port, data) {
                 let address = new Uint8Array();
                 address = text1;
 
-                Wire = new TwoWire();
-                Wire.begin(address);
+                //Wire = new TwoWire();
+                //Wire.begin(address);
                 
-                
+                buffer = new Buffer([255, 85, 36, sensorIdx, this.actionTypes.MODULE, device, port]);
+                buffer = Buffer.concat([buffer, text0, text1, dummy]);    
+
                 /*
                 var lcd = new LiquidCrystal_I2C({
                     board: board,
